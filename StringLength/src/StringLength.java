@@ -2,52 +2,18 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 class StringLength {
-	public static void main(String[] args) {
-		
-		String s = "joão";
-		/*
-		System.out.println("Length: " + s.length());
-		
-		try {
-			System.out.println("Bytes em ISO-8859-1: " + s.getBytes("ISO-8859-1").length);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			System.out.println("Bytes em UTF-8: " + s.getBytes("UTF-8").length);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			System.out.println("Bytes em UTF-16: " + s.getBytes("UTF-16").length);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			System.out.println("Bytes em windows-1252: " + s.getBytes("windows-1252").length);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		System.out.println("Bytes em chamada de getBytes sem argumentos: " + s.getBytes().length);
-
+	public static void main(String[] args) {		
+		String stringDefaultCharset = "joão";
+		System.out.println("Length em default charset: " + stringDefaultCharset.length());
+		System.out.println("Length levando em conta a quantidade de caracteres: " + stringDefaultCharset.codePointCount(0,stringDefaultCharset.length()));
 		System.out.println("Default Charset da nossa JVM: "+ Charset.defaultCharset());
 
-		char c = 7;
-		System.out.println(c);
-		char a = 'a';
-		System.out.println(Integer.toHexString(a));
-		*/
+		String stringUTF8 = new String(stringDefaultCharset.getBytes(),Charset.forName("UTF-8"));
+		System.out.println("Length em UTF-8: " + stringUTF8.length());
+		System.out.println("Length levando em conta a quantidade de caracteres: " + stringUTF8.codePointCount(0,stringUTF8.length()));
 
-		System.out.println(s.charAt(4) + "-" + s.codePointAt(4));
-		char[] array = s.toCharArray();
-		System.out.println(array.length);
-		for (char c : array) {
-			System.out.print(c);
-		}
-	}
-	
+		String stringISO88591 = new String(stringDefaultCharset.getBytes(),Charset.forName("ISO-8859-1"));
+		System.out.println("Length em ISO 8859-1: " + stringISO88591.length());
+		System.out.println("Length levando em conta a quantidade de caracteres: " + stringISO88591.codePointCount(0,stringISO88591.length()));
+	}	
 }
